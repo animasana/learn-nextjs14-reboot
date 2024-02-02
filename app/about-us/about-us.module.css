@@ -1,0 +1,12 @@
+.h1 {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding-top: 50px;
+}

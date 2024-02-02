@@ -1,3 +1,3 @@
 export default function Loading() {
-  return <h1>Loading...(Fetching Detail Movie)</h1>
+  return <h2>Loading...(Fetching Detail Movie)</h2>
 }

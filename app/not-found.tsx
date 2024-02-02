@@ -5,5 +5,5 @@ export const metadata: Metadata = {
 }
 
 export default function NotFound() {  
-  return <h1>안 보이지!!!</h1>;
+  return <h1>Not Found!!!</h1>;
 }
