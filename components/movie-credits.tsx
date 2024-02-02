@@ -1,6 +1,6 @@
-import { API_URL } from "../app/(home)/page";
 import Credit from "./credit";
 import styles from "../styles/credits.module.css"
+import { API_URL } from "../app/constants";
 
 const dummy = "https://conservation-innovations.org/wp-content/uploads/2019/09/Dummy-Person.png";
 

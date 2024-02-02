@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { API_URL } from "../../../../(home)/page";
 import Movie from "../../../../../components/movie";
 import styles from "./similar-movies.module.css";
+import { API_URL, MOVIE_NOT_FOUND } from "../../../../constants";
 
 const getSimilarMovies = async (id: string) => {  
   const response = await fetch(`${API_URL}/${id}/similar`);
@@ -11,8 +11,6 @@ const getSimilarMovies = async (id: string) => {
 interface IParams {
   params: { id: string }; 
 }
-
-export const movieNotFound = "https://media.istockphoto.com/id/1265221960/sv/vektor/sidan-hittades-inte-fel-med-filmflik-design.jpg?s=2048x2048&w=is&k=20&c=dF66Bt4iCOp0fLi9rhELI4QjJV0rMAc21fhklu7kdoA="
 
 export default async function SimilarMovies({ params: { id } }: IParams) {
   const similarMovies = await getSimilarMovies(id);
@@ -30,7 +28,7 @@ export default async function SimilarMovies({ params: { id } }: IParams) {
                 key={movie.id} 
                 id={movie.id} 
                 title={movie.title} 
-                poster_path={movie.poster_path ?? movieNotFound} 
+                poster_path={movie.poster_path ?? MOVIE_NOT_FOUND} 
               />            
             ) 
           }

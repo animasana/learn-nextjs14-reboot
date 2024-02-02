@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { API_URL } from "../app/(home)/page";
 import styles from "../styles/movie-info.module.css"
-import { movieNotFound } from "../app/(movies)/movies/[id]/similar/page";
+import { MOVIE_NOT_FOUND, API_URL } from "../app/constants";
 
 export async function getMovie(id: string) {
   console.log(`Fetching movies: ${Date.now()}`);  
@@ -17,7 +16,7 @@ export default async function MovieInfo({ id }: { id: string }) {
   return (
     <div className={styles.container}>      
       <img 
-        src={movie.poster_path === "https://image.tmdb.org/t/p/w780null" ? movieNotFound : movie.poster_path} 
+        src={movie.poster_path === "https://image.tmdb.org/t/p/w780null" ? MOVIE_NOT_FOUND : movie.poster_path} 
         className={styles.poster} 
         alt={movie.title} 
       />
