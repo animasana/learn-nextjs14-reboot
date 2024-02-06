@@ -1,8 +1,6 @@
 import Credit from "./credit";
 import styles from "../styles/credits.module.css"
-import { API_URL } from "../app/constants";
-
-const dummy = "https://conservation-innovations.org/wp-content/uploads/2019/09/Dummy-Person.png";
+import { API_URL, DUMMY_PERSON } from "../app/constants";
 
 export async function getCredits(id: string) {
   const response = await fetch(`${API_URL}/${id}/credits`);
@@ -15,7 +13,7 @@ export default async function MovieCredits({ id }: { id: string }) {
   return (
     <>
       <div className={styles.anchor_back}>
-        <a href={`/movies/${id}`}>&larr; Back to the movie-info</a>
+        <a href={`/movies/${id}`}>&larr; Back to the movie info</a>
       </div>
       <div className={styles.container}>      
         {credits.map(credit => 
@@ -23,7 +21,7 @@ export default async function MovieCredits({ id }: { id: string }) {
             key={credit.id}
             name={credit.name} 
             character={credit.character}          
-            profile_path={credit.profile_path ?? dummy} 
+            profile_path={credit.profile_path ?? DUMMY_PERSON} 
           />
         )}
       </div>

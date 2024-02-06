@@ -17,7 +17,7 @@ export default async function SimilarMovies({ params: { id } }: IParams) {
   return (
     <>       
       <span className={styles.anchor_back}>        
-        <Link href={`/movies/${id}`}>&larr; Backt to the movie info</Link>
+        <Link href={`/movies/${id}`}>&larr; Back to the movie info</Link>
       </span>      
       { 
         (similarMovies.length !== 0) ?
@@ -34,7 +34,7 @@ export default async function SimilarMovies({ params: { id } }: IParams) {
           }
         </div> 
         : 
-        <h1 className={styles.not_found}>Movies Not Found!!!</h1>          
+        <h1 className={styles.not_found}>Movie Not Found!!!</h1>          
       }      
     </>
   );

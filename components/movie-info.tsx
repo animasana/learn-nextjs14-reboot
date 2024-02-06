@@ -30,6 +30,9 @@ export default async function MovieInfo({ id }: { id: string }) {
         <Link href={`${id}/credits`}>
           Credits &rarr;
         </Link>
+        <Link href={`${id}/providers`}>
+          Providers &rarr;
+        </Link>
         <Link href={`${id}/similar`}>
           Similar Movies &rarr;
         </Link>
