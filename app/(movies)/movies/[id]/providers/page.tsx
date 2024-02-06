@@ -24,7 +24,7 @@ export default async function Providers({ params: { id } }: IParmas) {
       />
       <div className={styles.logo}>
         <div>
-            <Link href={`/movies/${id}`}>&larr; Back to the movie info</Link>
+            <Link prefetch href={`/movies/${id}`}>&larr; Back to the movie info</Link>
         </div>
         <div>
           <h1 className={styles.korea}>KR</h1>

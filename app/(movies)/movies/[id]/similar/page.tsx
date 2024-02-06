@@ -17,7 +17,7 @@ export default async function SimilarMovies({ params: { id } }: IParams) {
   return (
     <>       
       <span className={styles.anchor_back}>        
-        <Link href={`/movies/${id}`}>&larr; Back to the movie info</Link>
+        <Link prefetch href={`/movies/${id}`}>&larr; Back to the movie info</Link>
       </span>      
       { 
         (similarMovies.length !== 0) ?
