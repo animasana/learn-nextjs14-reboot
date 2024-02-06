@@ -20,17 +20,21 @@ export default async function ProviderLogos({id, country, purchaseType}: IProvid
       <div>        
         <h1 className={styles.purchase_type}>{purchaseType.toUpperCase()}</h1>
       </div>
-      <div className={styles.logo}>
+      <div className={styles.logo_container}>
         {
           providers[country] && providers[country][purchaseType] ?
           providers[country][purchaseType].map(
-            provider => 
-              <img 
-                key={provider["provider_id"]} 
-                src={provider.logo_path.startsWith("http://") ? provider.logo_path : `https://image.tmdb.org/t/p/w300/${provider.logo_path}`} 
-              />
+            provider => (
+              <div className={styles.logo}>
+                <img 
+                  key={provider["provider_id"]} 
+                  src={provider.logo_path.startsWith("http://") ? provider.logo_path : `https://image.tmdb.org/t/p/w300/${provider.logo_path}`} 
+                />
+                <figcaption>{provider["provider_name"]}</figcaption>
+              </div>              
+            )
           ) : (
-            <h1>Provider가 없습니다.</h1>
+            <h1 className={styles.no_provider}>Provider가 없습니다.</h1>
           )
         }
       </div>
