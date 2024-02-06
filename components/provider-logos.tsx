@@ -17,9 +17,8 @@ export default async function ProviderLogos({id, country, purchaseType}: IProvid
 
   return (          
     <div className={styles.container}>
-      <div>
-        <h1>{country.toUpperCase()}</h1>
-        <h1>{purchaseType.toUpperCase()}</h1>
+      <div>        
+        <h1 className={styles.purchase_type}>{purchaseType.toUpperCase()}</h1>
       </div>
       <div className={styles.logo}>
         {

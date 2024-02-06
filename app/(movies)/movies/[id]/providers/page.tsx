@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getMovie } from "../../../../../components/movie-info";
 import ProviderLogos from "../../../../../components/provider-logos";
-import { API_URL, MOVIE_NOT_FOUND, howToBuys } from "../../../../constants";
+import { MOVIE_NOT_FOUND } from "../../../../constants";
 import styles from "./providers.module.css";
 
 export const metadata = {
@@ -27,9 +27,15 @@ export default async function Providers({ params: { id } }: IParmas) {
             <Link href={`/movies/${id}`}>&larr; Back to the movie info</Link>
         </div>
         <div>
+          <h1 className={styles.korea}>KR</h1>
           <ProviderLogos id={id} country="KR" purchaseType="buy" />
           <ProviderLogos id={id} country="KR" purchaseType="rent" />
           <ProviderLogos id={id} country="KR" purchaseType="flatrate" />
+
+          <h1 className={styles.usa}>US</h1>
+          <ProviderLogos id={id} country="US" purchaseType="buy" />
+          <ProviderLogos id={id} country="US" purchaseType="rent" />
+          <ProviderLogos id={id} country="US" purchaseType="flatrate" />
         </div>
       </div>
     </div>
