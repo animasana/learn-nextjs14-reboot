@@ -13,7 +13,7 @@ export async function generateMetadata({ params: { id } }: IParams) {
   }
 }
 
-export default function Credits({ params: { id } }: IParmas) {
+export default function Credits({ params: { id } }: IParams) {
   return (
     <Suspense fallback={<h1>Loading Movie Credits...</h1>}>
       <MovieCredits id={id} />
