@@ -1,5 +1,6 @@
 import { API_URL } from "../app/constants";
 import styles from "../styles/provider-logos.module.css";
+import { getUUIDV5 } from "./provider-country";
 
 export async function getProviders(id: string) {
   const response = await fetch(`${API_URL}/${id}/providers`);
@@ -27,6 +28,7 @@ export default async function ProviderLogos({id, country, purchaseType}: IProvid
                 <img 
                   key={provider["provider_id"]} 
                   src={provider.logo_path.startsWith("http://") ? provider.logo_path : `https://image.tmdb.org/t/p/w300/${provider.logo_path}`} 
+                  alt={provider["provider_name"]}
                 />
                 <figcaption>{provider["provider_name"]}</figcaption>
               </div>              
