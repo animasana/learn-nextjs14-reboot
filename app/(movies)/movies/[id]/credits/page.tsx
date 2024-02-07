@@ -9,7 +9,7 @@ interface IParmas {
   params: { id: string }
 }
 
-export default async function Credits({ params: { id } }: IParmas) {
+export default function Credits({ params: { id } }: IParmas) {
   return (
     <Suspense fallback={<h1>Loading movie credits...</h1>}>
       <MovieCredits id={id} />
