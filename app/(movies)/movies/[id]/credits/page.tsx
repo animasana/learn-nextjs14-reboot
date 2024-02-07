@@ -1,12 +1,16 @@
 import { Suspense } from "react"
 import MovieCredits from "../../../../../components/movie-credits";
+import { getMovie } from "../../../../../components/movie-info";
 
-export const metadata = {
-  title: "Credits",
+interface IParams {
+  params: { id: string}
 }
 
-interface IParmas {
-  params: { id: string }
+export async function generateMetadata({ params: { id } }: IParams) {
+  const movie = await getMovie(id);
+  return {
+    title: `\"${movie.title}\" Credits`,
+  }
 }
 
 export default function Credits({ params: { id } }: IParmas) {

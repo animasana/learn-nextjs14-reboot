@@ -1,8 +1,12 @@
 import { Suspense } from "react";
 import SimilarMovies from "../../../../../components/similar-movies";
+import { getMovie } from "../../../../../components/movie-info";
 
-export const metadata = {
-  title: "Similar Movies",
+export async function generateMetadata({ params: { id } }: IParams) {
+  const movie = await getMovie(id);
+  return {
+    title: `The Movies Similar to \"${movie.title}\"`,
+  }
 }
 
 interface IParams {
