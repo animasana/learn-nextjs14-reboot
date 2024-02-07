@@ -24,14 +24,14 @@ export default async function ProviderLogos({id, country, purchaseType}: IProvid
           providers[country] && providers[country][purchaseType] ?
           providers[country][purchaseType].map(
             provider => (
-              <div className={styles.logo}>
+              <span className={styles.logo}>
                 <img 
                   key={provider["provider_id"]} 
                   src={provider.logo_path.startsWith("http://") ? provider.logo_path : `https://image.tmdb.org/t/p/w300/${provider.logo_path}`} 
                   alt={provider["provider_name"]}
                 />
                 <figcaption>{provider["provider_name"]}</figcaption>
-              </div>              
+              </span>              
             )
           ) : (
             <h1 className={styles.no_provider}>Provider가 없습니다.</h1>
