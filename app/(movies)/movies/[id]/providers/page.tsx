@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getMovie } from "../../../../../components/movie-info";
-import ProviderLogos from "../../../../../components/provider-logos";
 import { MOVIE_NOT_FOUND } from "../../../../constants";
 import styles from "./providers.module.css";
+import ProviderCountry from "../../../../../components/provider-country";
 
 export const metadata = {
   title: "Providers",
@@ -21,22 +21,11 @@ export default async function Providers({ params: { id } }: IParmas) {
         src={movie.poster_path === "https://image.tmdb.org/t/p/w780null" ? MOVIE_NOT_FOUND : movie.poster_path} 
         className={styles.poster} 
         alt={movie.title} 
-      />
-      <div className={styles.logo}>
-        <div>
-            <Link prefetch href={`/movies/${id}`}>&larr; Back to the movie info</Link>
-        </div>
-        <div>
-          <h1 className={styles.korea}>KR</h1>
-          <ProviderLogos id={id} country="KR" purchaseType="buy" />
-          <ProviderLogos id={id} country="KR" purchaseType="rent" />
-          <ProviderLogos id={id} country="KR" purchaseType="flatrate" />
-
-          <h1 className={styles.usa}>US</h1>
-          <ProviderLogos id={id} country="US" purchaseType="buy" />
-          <ProviderLogos id={id} country="US" purchaseType="rent" />
-          <ProviderLogos id={id} country="US" purchaseType="flatrate" />
-        </div>
+      />      
+      <div className={styles.logo}>        
+        <Link prefetch href={`/movies/${id}`}>&larr; Back to the movie info</Link>        
+        <ProviderCountry id={id} country="KR" />
+        <ProviderCountry id={id} country="US" />        
       </div>
     </div>
     );  

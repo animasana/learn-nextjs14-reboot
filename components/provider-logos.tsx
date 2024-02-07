@@ -16,10 +16,8 @@ export default async function ProviderLogos({id, country, purchaseType}: IProvid
   const providers = await getProviders(id);  
 
   return (          
-    <div className={styles.container}>
-      <div>        
-        <h1 className={styles.purchase_type}>{purchaseType.toUpperCase()}</h1>
-      </div>
+    <div className={styles.container}>      
+      <h1 className={styles.purchase_type}>{purchaseType.toUpperCase()}</h1>      
       <div className={styles.logo_container}>
         {
           providers[country] && providers[country][purchaseType] ?
