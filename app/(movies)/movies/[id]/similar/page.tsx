@@ -1,6 +1,10 @@
 import { Suspense } from "react";
 import SimilarMovies from "../../../../../components/similar-movies";
 
+export const metadata = {
+  title: "Similar Movies",
+}
+
 interface IParams {
   params: { id: string }; 
 }
