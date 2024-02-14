@@ -3,7 +3,7 @@ import styles from "../styles/movie-info.module.css"
 import { MOVIE_NOT_FOUND, API_URL } from "../app/constants";
 
 export async function getMovie(id: string) {
-  console.log(`Fetching movies: ${Date.now()}`);  
+  //console.log(`Fetching movies: ${Date.now()}`);  
   //await new Promise((resolve) => setTimeout(resolve, 2_000));
   //throw Error("Something Broken...!!");
   const response = await fetch(`${API_URL}/${id}`);

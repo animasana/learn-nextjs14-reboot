@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "../styles/movie.module.css";
 
-interface IMovieProps {
+export interface IMovieProps {
   id: string;
   title: string;
   poster_path: string;
@@ -12,7 +12,7 @@ interface IMovieProps {
 
 export default function Movie({id, title, poster_path}: IMovieProps) {
   const router = useRouter();
-  const onClick = () => {
+  const onClick = () => {    
     router.push(`/movies/${id}`);
   }
   return (

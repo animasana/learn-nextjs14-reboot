@@ -18,18 +18,39 @@
   font-weight: 600;
 }
 
-.logo {
+.icon_container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  width: 80px;  
+}
+
+.icon {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  gap: 20px;
+  align-items: center;  
+  margin-right: 25px;
 }
 
-/* .korea {
-  font-size: 40px;
+.icon img {  
+  max-width: 50px;
+  min-height: 50px;  
+  margin-bottom: 10px;  
+  border-radius: 10px;  
 }
 
-.usa {
-  font-size: 40px;
-  margin-top: 40px;
-} */
+.icon figcaption {
+  font-size: 14px;
+  text-align: center;
+}
+
+.anchor_back {
+  display: flex;
+  justify-content: center;  
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.anchor_back a:hover {
+  cursor: pointer;
+}
