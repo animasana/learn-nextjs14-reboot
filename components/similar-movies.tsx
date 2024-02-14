@@ -8,6 +8,21 @@ const getSimilarMovies = async (id: string) => {
   return response.json();  
 }
 
+function SimilarMovie({ movies }) {
+  return (
+    <div className={styles.container}>         
+      {movies.map(movie => 
+        <Movie 
+          key={movie.id} 
+          id={movie.id} 
+          title={movie.title} 
+          poster_path={movie.poster_path ?? MOVIE_NOT_FOUND} 
+        />            
+      )}
+    </div> 
+  );
+}
+
 export default async function SimilarMovies({ id }: { id: string }) {
   const similarMovies = await getSimilarMovies(id);
   return (
@@ -17,19 +32,7 @@ export default async function SimilarMovies({ id }: { id: string }) {
       </span>      
       { 
         (similarMovies.length !== 0) ?
-        <div className={styles.container}>         
-          {
-            similarMovies.map(movie => 
-              <Movie 
-                key={movie.id} 
-                id={movie.id} 
-                title={movie.title} 
-                poster_path={movie.poster_path ?? MOVIE_NOT_FOUND} 
-              />            
-            ) 
-          }
-        </div> 
-        : 
+        <SimilarMovie movies={similarMovies} /> : 
         <h1 className={styles.not_found}>Movie Not Found!!!</h1>          
       }      
     </>
