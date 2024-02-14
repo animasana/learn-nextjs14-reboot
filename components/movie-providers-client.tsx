@@ -34,7 +34,8 @@ export default function MovieProvidersClient({ children, id }: { children: React
   const [countries, setCountries] = useState([[]])
   const [countrySelected, setCountrySelected] = useState("");
   const [purchaseTypes, setPurchaseTypes] = useState([]);
-  const [purchaseType, setPurchaseType] = useState("")
+  const [purchaseType, setPurchaseType] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async (id: string) => {
@@ -44,10 +45,11 @@ export default function MovieProvidersClient({ children, id }: { children: React
         setProviders(providers);
         setCountries(countries);
 
-        const firstCountry = countries[0][0];
+        const firstCountry = countries[0][0]; //[[], [], []...]
         setCountrySelected(firstCountry);      
         setPurchaseTypes(Object.keys(providers?.[firstCountry])?.filter(p => p != 'link'));          
       }
+      setIsLoading(false);
     }
     fetchData(id);    
   }, [id]);
@@ -98,7 +100,7 @@ export default function MovieProvidersClient({ children, id }: { children: React
       <BackButton id={id} />
       <div className={styles.container}>
         {children}
-        {Object.keys(providers).length !== 0 ?
+        {Object.keys(providers).length !== 0 ? (
           <div>
             <label htmlFor="country">Choose a country: </label>
             <select id="country-select" className={styles.select} value={countrySelected} onChange={handleCountrySelectChange}>
@@ -111,11 +113,13 @@ export default function MovieProvidersClient({ children, id }: { children: React
               {providerIcons}
             </div>
           </div>
-        : 
+        ) : (          
           <div>
-            <NotFoundMessage text="Provider Not Found" />
+            <NotFoundMessage 
+              text={isLoading ? "Loading Icons..." : "Provider Not Found"} 
+            />
           </div>
-        }
+        )}
       </div>
     </>    
   );
