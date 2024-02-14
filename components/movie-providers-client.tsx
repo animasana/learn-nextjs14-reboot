@@ -5,6 +5,15 @@ import { TCountryCode, getCountryData } from "countries-list";
 import styles from '../styles/providers.module.css';
 import Link from "next/link";
 import { API_URL } from "../app/constants";
+import {v4 as uuidv4, v5 as uuidv5} from 'uuid';
+
+export function getUUIDV5(how: string): string {
+  if (how) {
+    const MY_NAMESPACE = uuidv4();  
+    return uuidv5(how, MY_NAMESPACE);
+  }
+  return uuidv4();
+}
 
 export function BackButton({ id }: { id: string }) {
   return (    
@@ -36,7 +45,7 @@ function Capitalize(str) {
 
 export default function MovieProvidersClient({ children, id }: { children: React.ReactNode, id: string }) {
   const [providers, setProviders] = useState({});
-  const [countries, setCountries] = useState([[]])
+  const [countries, setCountries] = useState([[]]);
   const [countrySelected, setCountrySelected] = useState("");
   const [purchaseTypes, setPurchaseTypes] = useState([]);
   const [purchaseType, setPurchaseType] = useState("");
@@ -80,12 +89,13 @@ export default function MovieProvidersClient({ children, id }: { children: React
     setPurchaseType(event.target.value);
   }
 
-  const countryOptions = countries.map(country => (
-    <option key={country[0]} value={country[0]}>{country[1]}</option>
+  const countryOptions = countries?.map(country => (
+    // 0: 두자리 국가 코드 1: 국가명
+    <option key={getUUIDV5(country[0])} value={country[0]}>{country[1]}</option>
   ));
 
   const purchaseOptions = purchaseTypes?.map(pType => (
-    <option key={pType} value={pType}>{Capitalize(pType)}</option>
+    <option key={getUUIDV5(pType)} value={pType}>{Capitalize(pType)}</option>
   ));
 
   const providerIcons = providers[countrySelected]?.[purchaseType]?.map((provider) => (     

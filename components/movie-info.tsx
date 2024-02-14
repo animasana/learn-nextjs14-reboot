@@ -10,13 +10,17 @@ export async function getMovie(id: string) {
   return response.json();
 }
 
+export function isNoPoster(movie) {
+  return movie.poster_path === "https://image.tmdb.org/t/p/w780null";
+}
+
 export default async function MovieInfo({ id }: { id: string }) {
   const movie = await getMovie(id);
 
   return (
     <div className={styles.container}>      
       <img 
-        src={movie.poster_path === "https://image.tmdb.org/t/p/w780null" ? MOVIE_NOT_FOUND : movie.poster_path} 
+        src={isNoPoster(movie) ? MOVIE_NOT_FOUND : movie.poster_path} 
         className={styles.poster} 
         alt={movie.title} 
       />
