@@ -6,7 +6,7 @@ interface ICreditProps {
   profile_path: string;
 }
 
-export default function Credit({name, character, profile_path }: ICreditProps) {  
+export default function Credit({ name, character, profile_path }: ICreditProps) {  
   return (
     <div className={styles.credit}>      
       <img src={profile_path} alt={name} />              

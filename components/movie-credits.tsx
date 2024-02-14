@@ -2,6 +2,7 @@ import Credit from "./credit";
 import styles from "../styles/credits.module.css"
 import { API_URL, DUMMY_PERSON } from "../app/constants";
 import Link from "next/link";
+import { BackButton } from "./movie-providers-client";
 
 export async function getCredits(id: string) {
   const response = await fetch(`${API_URL}/${id}/credits`);
@@ -13,9 +14,7 @@ export default async function MovieCredits({ id }: { id: string }) {
 
   return (
     <>
-      <div className={styles.anchor_back}>
-        <Link prefetch href={`/movies/${id}`}>&larr; Back to the movie info</Link>
-      </div>
+      <BackButton id={id} />
       <div className={styles.container}>      
         {credits.map(credit => 
           <Credit 

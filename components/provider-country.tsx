@@ -1,6 +1,6 @@
 import { HOW_TO_BUY } from "../app/constants";
 import styles from "../styles/provider-country.module.css";
-import ProviderLogos from "./provider-logos";
+import ProviderLogos from "./provider-logos-01.tsx";
 import {v4 as uuidv4, v5 as uuidv5} from 'uuid';
 
 interface IProviderCountryProps {

@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import { getProviders } from "./provider-logos";
+import { useEffect, useState } from "react";
 import { TCountryCode, getCountryData } from "countries-list";
 import styles from '../styles/providers.module.css';
 import Link from "next/link";
+import { API_URL } from "../app/constants";
 
 export function BackButton({ id }: { id: string }) {
   return (    
@@ -16,6 +16,11 @@ export function BackButton({ id }: { id: string }) {
 
 export function NotFoundMessage({ text }: { text: string }) {
   return <h1 className={styles.not_found}>{text}</h1>;
+}
+
+export async function getProviders(id: string) {
+  const response = await fetch(`${API_URL}/${id}/providers`);
+  return response.json();
 }
 
 function getCodeAndName(providers) {

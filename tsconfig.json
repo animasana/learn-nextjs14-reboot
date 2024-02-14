@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/provider-logos-01.tsx"  ],
   "exclude": [
     "node_modules"
   ]
