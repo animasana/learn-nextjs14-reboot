@@ -2,13 +2,14 @@ import Link from "next/link";
 import { API_URL, MOVIE_NOT_FOUND } from "../app/constants";
 import Movie from "./movie";
 import styles from "../styles/similar-movies.module.css";
+import { BackButton } from "./movie-providers-client";
 
 const getSimilarMovies = async (id: string) => {  
   const response = await fetch(`${API_URL}/${id}/similar`);
   return response.json();  
 }
 
-function SimilarMovie({ movies }) {
+function MoviesList({ movies }) {
   return (
     <div className={styles.container}>         
       {movies.map(movie => 
@@ -25,16 +26,17 @@ function SimilarMovie({ movies }) {
 
 export default async function SimilarMovies({ id }: { id: string }) {
   const similarMovies = await getSimilarMovies(id);
-  return (
-    <>       
-      <span className={styles.anchor_back}>        
-        <Link prefetch href={`/movies/${id}`}>&larr; Back to the movie info</Link>
-      </span>      
-      { 
-        (similarMovies.length !== 0) ?
-        <SimilarMovie movies={similarMovies} /> : 
-        <h1 className={styles.not_found}>Movie Not Found!!!</h1>          
-      }      
+  if (similarMovies.length > 0) {
+    return (
+      <>
+        <BackButton id={id} />
+        <MoviesList movies={similarMovies} />
+      </>
+    )
+  }
+  return (    
+    <>      
+      <h1 className={styles.not_found}>Movie Not Found!!!</h1>            
     </>
   );
 }
