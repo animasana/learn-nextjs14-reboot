@@ -14,6 +14,10 @@ export function BackButton({ id }: { id: string }) {
   )
 }
 
+export function NotFoundMessage({ text }: { text: string }) {
+  return <h1 className={styles.not_found}>{text}</h1>;
+}
+
 function getCodeAndName(providers) {
   return Object.keys(providers).map(key => {
     const countryData = getCountryData(key as TCountryCode);    
@@ -35,13 +39,15 @@ export default function MovieProvidersClient({ children, id }: { children: React
   useEffect(() => {
     const fetchData = async (id: string) => {
       const providers = await getProviders(id); 
-      const countries = getCodeAndName(providers);     
-      setProviders(providers);
-      setCountries(countries);
+      if (Object.keys(providers).length !== 0) {
+        const countries = getCodeAndName(providers);     
+        setProviders(providers);
+        setCountries(countries);
 
-      const firstCountry = countries[0][0];
-      setCountrySelected(firstCountry);      
-      setPurchaseTypes(Object.keys(providers?.[firstCountry])?.filter(p => p != 'link'));          
+        const firstCountry = countries[0][0];
+        setCountrySelected(firstCountry);      
+        setPurchaseTypes(Object.keys(providers?.[firstCountry])?.filter(p => p != 'link'));          
+      }
     }
     fetchData(id);    
   }, [id]);
@@ -87,24 +93,30 @@ export default function MovieProvidersClient({ children, id }: { children: React
     </span>    
   ));
 
-  return (
-    <>
+  return (    
+    <>      
       <BackButton id={id} />
       <div className={styles.container}>
         {children}
-        <div>
-          <label htmlFor="country">Choose a country: </label>
-          <select id="country-select" value={countrySelected} onChange={handleCountrySelectChange}>
-            {countryOptions}
-          </select>
-          <select id="purchase-type" value={purchaseType} onChange={handlePurchaseSelectChange}>
-            {purchaseOptions}
-          </select>        
-          <div className={styles.icon_container}>
-            {providerIcons}
+        {Object.keys(providers).length !== 0 ?
+          <div>
+            <label htmlFor="country">Choose a country: </label>
+            <select id="country-select" className={styles.select} value={countrySelected} onChange={handleCountrySelectChange}>
+              {countryOptions}
+            </select>
+            <select id="purchase-type" value={purchaseType} onChange={handlePurchaseSelectChange}>
+              {purchaseOptions}
+            </select>        
+            <div className={styles.icon_container}>
+              {providerIcons}
+            </div>
           </div>
-        </div>
+        : 
+          <div>
+            <NotFoundMessage text="Provider Not Found" />
+          </div>
+        }
       </div>
-    </>
+    </>    
   );
 }

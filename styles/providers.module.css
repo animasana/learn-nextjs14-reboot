@@ -6,6 +6,10 @@
   margin: 0 auto;
 }
 
+.select {
+  margin-right: 10px;
+}
+
 .poster {
   border-radius: 20px;
   max-width: 100%;
@@ -53,4 +57,13 @@
 
 .anchor_back a:hover {
   cursor: pointer;
+}
+
+.not_found {
+  font-size: 50px;
+  display: flex;
+  justify-content: left;  
+  text-align: left;
+  padding-bottom: 100px;
+  padding-left: 80px
 }
