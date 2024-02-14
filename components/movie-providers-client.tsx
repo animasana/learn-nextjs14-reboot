@@ -93,7 +93,7 @@ export default function MovieProvidersClient({ children, id }: { children: React
       <div className={styles.container}>
         {children}
         <div>
-          <label htmlFor="country">Choose a country:</label>
+          <label htmlFor="country">Choose a country: </label>
           <select id="country-select" value={countrySelected} onChange={handleCountrySelectChange}>
             {countryOptions}
           </select>
