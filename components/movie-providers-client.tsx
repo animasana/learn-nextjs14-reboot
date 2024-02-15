@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TCountryCode, getCountryData } from "countries-list";
 import styles from '../styles/providers.module.css';
 import Link from "next/link";
@@ -43,25 +43,24 @@ function Capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export default function MovieProvidersClient({ children, id }: { children: React.ReactNode, id: string }) {
-  const [providers, setProviders] = useState({});
-  const [countries, setCountries] = useState([[]]);
+export default function MovieProvidersClient({ children, id }: { children: React.ReactNode, id: string }) {  
   const [countrySelected, setCountrySelected] = useState("");
   const [purchaseTypes, setPurchaseTypes] = useState([]);
   const [purchaseType, setPurchaseType] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const countriesRef = useRef([[]]);
+  const providersRef = useRef({});
 
   useEffect(() => {
     const fetchData = async (id: string) => {
       const providers = await getProviders(id); 
       if (Object.keys(providers).length !== 0) {
-        const countries = getCodeAndName(providers);     
-        setProviders(providers);
-        setCountries(countries);
+        providersRef.current = providers;
+        countriesRef.current = getCodeAndName(providersRef.current);
 
-        const firstCountry = countries[0][0]; //[[], [], []...]
+        const firstCountry = countriesRef.current[0][0]; //[[], [], []...]
         setCountrySelected(firstCountry);      
-        setPurchaseTypes(Object.keys(providers?.[firstCountry])?.filter(p => p != 'link'));          
+        setPurchaseTypes(Object.keys(providersRef.current?.[firstCountry])?.filter(p => p != 'link'));          
       }
       setIsLoading(false);
     }
@@ -75,7 +74,7 @@ export default function MovieProvidersClient({ children, id }: { children: React
   
   useEffect(() => {
     const purchases = [];
-    for (const purchase in providers?.[countrySelected]) {
+    for (const purchase in providersRef.current[countrySelected]) {
       purchases.push(purchase);            
     }
     setPurchaseTypes(purchases.filter(p => p !== 'link'));    
@@ -89,7 +88,7 @@ export default function MovieProvidersClient({ children, id }: { children: React
     setPurchaseType(event.target.value);
   }
 
-  const countryOptions = countries?.map(country => (
+  const countryOptions = countriesRef.current.map(country => (
     // 0: 두자리 국가 코드 1: 국가명
     <option key={getUUIDV5(country[0])} value={country[0]}>{country[1]}</option>
   ));
@@ -98,7 +97,7 @@ export default function MovieProvidersClient({ children, id }: { children: React
     <option key={getUUIDV5(pType)} value={pType}>{Capitalize(pType)}</option>
   ));
 
-  const providerIcons = providers[countrySelected]?.[purchaseType]?.map((provider) => (     
+  const providerIcons = providersRef.current[countrySelected]?.[purchaseType]?.map((provider) => (     
     <span key={provider["provider_id"]} className={styles.icon}>
       <img         
         src={provider.logo_path.startsWith("http://") ? 
@@ -115,7 +114,7 @@ export default function MovieProvidersClient({ children, id }: { children: React
       <BackButton id={id} />
       <div className={styles.container}>
         {children}
-        {Object.keys(providers).length !== 0 ? (
+        {Object.keys(providersRef.current).length !== 0 ? (
           <div>
             <label htmlFor="country">Choose a country: </label>
             <select id="country-select" className={styles.select} value={countrySelected} onChange={handleCountrySelectChange}>
